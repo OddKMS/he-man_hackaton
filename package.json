@@ -1,0 +1,27 @@
+{
+  "name": "he-man_hackaton",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html && parcel watch",
+    "build": "parcel build index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OddKMS/he-man_hackaton.git"
+  },
+  "keywords": [
+    "he-man"
+  ],
+  "author": "Yes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OddKMS/he-man_hackaton/issues"
+  },
+  "homepage": "https://github.com/OddKMS/he-man_hackaton#readme",
+  "dependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
