@@ -12,6 +12,15 @@ function initMap() {
         styles: styledMap
     });
 
+    var icons = {
+        atm : {
+            icon : 'markers/atm.svg'
+        },
+        dnb : {
+            icon : 'markers/dnb.svg'
+        }
+    };
+
     console.log("Set up map: ", map);
     setup();
 }
@@ -85,6 +94,37 @@ function findATMs() {
     }
 }
 
+function findBankBranches() {
+    const lat = map.getBounds().getNorthEast().lat();
+    const lng = map.getBounds().getSouthWest().lng();
+    const position = new google.maps.LatLng(lat,lng);
+    const request = {
+        location: position,
+        radius: '2000',
+        name: 'DNB'
+    };
+    let service;
+    service = new google.maps.places.PlacesService(map);
+    service.nearbySearch(request, callback);
+
+    function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            for (let i = 0; i < results.length; i++) {
+                const place = {
+                    lat: results[i].geometry.location.lat(),
+                    lng: results[i].geometry.location.lng(),
+                } ;
+                console.log(place);
+                markers.push(new google.maps.Marker({
+                    position: place,
+                    map: map
+                }));
+            }
+        }
+    }
+}
+
+
 function setup() {
     /**
      * Buttons
@@ -97,5 +137,10 @@ function setup() {
     document.getElementById('btn-atms').addEventListener('click', () => {
         console.log('nearby atms');
         findATMs();
+    });
+
+    document.getElementById('btn-branches').addEventListener('click', () => {
+        console.log('nearby branches');
+        findBankBranches();
     });
 }
