@@ -3,6 +3,8 @@ import {styledMap} from './styledMap';
 console.log("Skeletor sucks.");
 
 let map;
+let mapArea;
+let bowVideo;
 let markers = [];
 
 function initMap() {
@@ -11,6 +13,9 @@ function initMap() {
         zoom: 8,
         styles: styledMap
     });
+
+    mapArea = document.getElementById('map');
+    bowVideo = document.getElementById('bow-video');
 
     console.log("Set up map: ", map);
     setup();
@@ -28,6 +33,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function findUser() {
+    showMapIfHidden();
     let infoWindow = new google.maps.InfoWindow;
     if (navigator.geolocation) {
         // Try HTML5 geolocation.
@@ -51,6 +57,7 @@ function findUser() {
 }
 
 function findATMs() {
+    showMapIfHidden();
     const lat = map.getBounds().getCenter().lat();
     const lng = map.getBounds().getCenter().lng();
     const position = new google.maps.LatLng(lat,lng);
@@ -93,6 +100,7 @@ function findATMs() {
 }
 
 function findBankBranches() {
+    showMapIfHidden();
     const lat = map.getBounds().getCenter().lat();
     const lng = map.getBounds().getCenter().lng();
     const position = new google.maps.LatLng(lat,lng);
@@ -136,7 +144,6 @@ function findBankBranches() {
     }
 }
 
-
 function setup() {
     /**
      * Buttons
@@ -155,4 +162,24 @@ function setup() {
         console.log('nearby branches');
         findBankBranches();
     });
+
+    document.getElementById('btn-bow').addEventListener('click', () => {
+        console.log('take a bow');
+        takeABow();
+    });
+}
+
+function showMapIfHidden() {
+    if(mapArea.hidden === true){
+        mapArea.hidden = false;
+        bowVideo.pause();
+        bowVideo.hidden = true;
+    }
+}
+
+function takeABow(){
+    mapArea.hidden = true;
+
+    bowVideo.hidden = false;
+    bowVideo.play();
 }

@@ -36,6 +36,13 @@
             background: #fff;
             border: 1px solid #000;
         }
+
+        .bow-video{
+            z-index: 100;
+            width: calc(100% - 300px);
+            height: 100%;
+            margin-left: 300px;
+        }
     </style>
 </head>
 <body>
@@ -43,8 +50,15 @@
         <button id="btn-location">Find me</button>
         <button id="btn-atms">Find atms</button>
         <button id="btn-branches">Find DNB Branches</button>
+        <button id="btn-bow">Take a bow!</button>
     </nav>
     <div id="map"></div>
+
+
+    <video id="bow-video" class="bow-video" poster="https://media.giphy.com/media/6O7ybdmHHJfoc/200_s.gif" loop="" hidden>
+        <source src="https://media.giphy.com/media/6O7ybdmHHJfoc/giphy.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
+        <img src="https://media.giphy.com/media/6O7ybdmHHJfoc/giphy.gif" title="Your browser does not support the mp4 video codec.">
+    </video>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA630qxToBqVCqe7CC0CbWxOaw7ykZNCEs&libraries=places"></script>
     <script src="./index.js"></script>
