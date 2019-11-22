@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <title>HE-MAN</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         #map {
             height: 100%;
+            width: calc(100% - 300px);
+            margin-left: 300px;
         }
         /* Optional: Makes the sample page fill the window. */
         html, body {
@@ -13,23 +18,33 @@
             margin: 0;
             padding: 0;
         }
+        button {
+            padding: 1rem;
+            font-size: 1rem;
+            width: 100%;
+            cursor: pointer;
+        }
+        .navigation {
+            z-index: 99;
+            width: 300px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 1rem;
+            background: #fff;
+            border: 1px solid #000;
+        }
     </style>
 </head>
 <body>
-
+    <nav class="navigation">
+        <button id="btn-location">Find me</button>
+    </nav>
     <div id="map"></div>
-    <script>
-        var map;
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -34.397, lng: 150.644},
-                zoom: 8
-            });
-        }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap"
-            async defer></script>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA630qxToBqVCqe7CC0CbWxOaw7ykZNCEs"
+            ></script>
     <script src="./index.js"></script>
 </body>
 </html>
