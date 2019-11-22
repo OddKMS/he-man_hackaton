@@ -10,7 +10,17 @@ function initMap() {
         zoom: 8,
         styles: styledMap
     });
-    console.log("Set up map: ", map)
+
+    var icons = {
+        atm : {
+            icon : 'markers/atm.svg'
+        },
+        dnb : {
+            icon : 'markers/dnb.svg'
+        }
+    };
+
+    console.log("Set up map: ", map);
     setup();
 }
 window.onload = initMap();
