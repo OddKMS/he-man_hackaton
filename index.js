@@ -50,7 +50,11 @@ function findUser() {
     }
 }
 
-function findATMs() {
+var infowindow = new google.maps.InfoWindow({
+    content: ""
+});
+
+function findATMs(listener) {
     const lat = map.getBounds().getCenter().lat();
     const lng = map.getBounds().getCenter().lng();
     const position = new google.maps.LatLng(lat,lng);
@@ -75,8 +79,10 @@ function findATMs() {
                     lat: results[i].geometry.location.lat(),
                     lng: results[i].geometry.location.lng(),
                 };
-                console.log(results[i]);
-                markers.push(new google.maps.Marker({
+                console.log(results[i])
+                let marker = new google.maps.Marker({
+                    title: results[i].name,
+                    address: results[i].vicinity,
                     position: place,
                     map: map,
                     icon: {
@@ -86,7 +92,12 @@ function findATMs() {
                             <path fill="white" stroke="yellow" stroke-width=".1" d="M8,9V10.5H10.25V15H11.75V10.5H14V9H8M6,9H3A1,1 0 0,0 2,10V15H3.5V13.5H5.5V15H7V10A1,1 0 0,0 6,9M5.5,12H3.5V10.5H5.5V12M21,9H16.5A1,1 0 0,0 15.5,10V15H17V10.5H18V14H19.5V10.5H20.5V15H22V10A1,1 0 0,0 21,9Z" /> \
                           </svg>'
                     }
-                }));
+                });
+                marker.addListener('click', function() {
+                    infowindow.setContent(marker.title + ' ' + marker.address)
+                    infowindow.open(map, marker);
+                });
+                markers.push(marker);
             }
         }
     }
@@ -118,7 +129,9 @@ function findBankBranches() {
                     lng: results[i].geometry.location.lng(),
                 } ;
                 console.log(results[i]);
-                markers.push(new google.maps.Marker({
+                const marker = new google.maps.Marker({
+                    title: results[i].name,
+                    address: results[i].vicinity,
                     position: place,
                     map: map,
                     icon: {
@@ -130,7 +143,12 @@ function findBankBranches() {
                             <path fill="white" stroke="yellow" d="M59.9016 0l.0877 48.7976a.9801.9801 0 0 1-.6872.956.7852.7852 0 0 1-.311.0678 1.011 1.011 0 0 1-.8229-.4217L36.3643 21.7303l.076 42.2638L33.1294 64l-.0879-48.9083a.9989.9989 0 0 1 .7094-.956.706.706 0 0 1 .311-.045 1.0218 1.0218 0 0 1 .8229.3978l21.8038 27.6922L56.6128.0059z" /> \
                             </svg>'
                     }
-                }));
+                });
+                marker.addListener('click', function() {
+                    infowindow.setContent(marker.title + ' ' + marker.address)
+                    infowindow.open(map, marker);
+                });
+                markers.push(marker);
             }
         }
     }
