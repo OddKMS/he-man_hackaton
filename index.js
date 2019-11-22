@@ -28,7 +28,7 @@ function findUser() {
     if (navigator.geolocation) {
         // Try HTML5 geolocation.
         navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
+            const pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
@@ -61,12 +61,12 @@ function findATMs() {
 
     function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
-            for (var i = 0; i < results.length; i++) {
-                var place = {
+            for (let i = 0; i < results.length; i++) {
+                const place = {
                     lat: results[i].geometry.location.lat(),
                     lng: results[i].geometry.location.lng(),
                 } ;
-                console.log(place)
+                console.log(place);
                 markers.push(new google.maps.Marker({position: place, map: map}));
             }
         }
