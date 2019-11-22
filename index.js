@@ -102,7 +102,7 @@ function findATMs(listener) {
                     }
                 });
                 marker.addListener('click', function() {
-                    infowindow.setContent(marker.title + ' ' + marker.address)
+                    infowindow.setContent(marker.title + '<br>' + marker.address);
                     infowindow.open(map, marker);
                 });
                 markers.push(marker);
