@@ -5,30 +5,12 @@ console.log("Skeletor sucks.");
 let map;
 let markers = [];
 
-var icons = {
-    atm : {
-        icon : './markers/atm.svg'
-    },
-    dnb : {
-        icon : 'markers/dnb.svg'
-    }
-};
-
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -34.397, lng: 150.644},
         zoom: 8,
         styles: styledMap
     });
-
-    var icons = {
-        atm : {
-            icon : 'markers/atm.svg'
-        },
-        dnb : {
-            icon : 'markers/dnb.svg'
-        }
-    };
 
     console.log("Set up map: ", map);
     setup();
@@ -109,8 +91,8 @@ function findATMs() {
 }
 
 function findBankBranches() {
-    const lat = map.getBounds().getNorthEast().lat();
-    const lng = map.getBounds().getSouthWest().lng();
+    const lat = map.getBounds().getCenter().lat();
+    const lng = map.getBounds().getCenter().lng();
     const position = new google.maps.LatLng(lat,lng);
     const request = {
         location: position,
