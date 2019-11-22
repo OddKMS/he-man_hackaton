@@ -4,6 +4,16 @@ console.log("Skeletor sucks.");
 
 let map;
 let markers = [];
+
+var icons = {
+    atm : {
+        icon : './markers/atm.svg'
+    },
+    dnb : {
+        icon : 'markers/dnb.svg'
+    }
+};
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -34.397, lng: 150.644},
@@ -57,8 +67,8 @@ function findUser() {
 }
 
 function findATMs() {
-    const lat = map.getBounds().getNorthEast().lat();
-    const lng = map.getBounds().getSouthWest().lng();
+    const lat = map.getBounds().getCenter().lat();
+    const lng = map.getBounds().getCenter().lng();
     const position = new google.maps.LatLng(lat,lng);
     const request = {
         location: position,
@@ -75,9 +85,19 @@ function findATMs() {
                 const place = {
                     lat: results[i].geometry.location.lat(),
                     lng: results[i].geometry.location.lng(),
-                } ;
-                console.log(place);
-                markers.push(new google.maps.Marker({position: place, map: map, }));
+                };
+                console.log(results[i])
+                markers.push(new google.maps.Marker({
+                    position: place,
+                    map: map,
+                    icon: {
+                        anchor: new google.maps.Point(16, 16),
+                        url: 'data:image/svg+xml;utf-8, \
+                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  width="64" height="64" viewBox="0 0 24 24"> \
+                            <path fill="white" stroke="yellow" stroke-width=".5" d="M8,9V10.5H10.25V15H11.75V10.5H14V9H8M6,9H3A1,1 0 0,0 2,10V15H3.5V13.5H5.5V15H7V10A1,1 0 0,0 6,9M5.5,12H3.5V10.5H5.5V12M21,9H16.5A1,1 0 0,0 15.5,10V15H17V10.5H18V14H19.5V10.5H20.5V15H22V10A1,1 0 0,0 21,9Z" /> \
+                          </svg>'
+                    }
+                }));
             }
         }
     }
