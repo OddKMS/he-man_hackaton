@@ -3,15 +3,16 @@ export const styledMap = [
     {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
     {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
     {
-        featureType: 'administrative.locality',
+        featureType: 'administrative',
         elementType: 'labels.text.fill',
-        stylers: [{color: '#d59563'}]
+        stylers: [{visibility: "off"}]
     },
     {
         featureType: 'poi',
         elementType: 'labels.text.fill',
-        stylers: [{color: '#d59563'}]
+        stylers: [{ visibility: "off" }]
     },
+    /*
     {
         featureType: 'poi.park',
         elementType: 'geometry',
@@ -22,6 +23,7 @@ export const styledMap = [
         elementType: 'labels.text.fill',
         stylers: [{color: '#6b9a76'}]
     },
+    */
     {
         featureType: 'road',
         elementType: 'geometry',
@@ -55,7 +57,7 @@ export const styledMap = [
     {
         featureType: 'transit',
         elementType: 'geometry',
-        stylers: [{color: '#2f3948'}]
+        stylers: [{color: '#2f3948' }]
     },
     {
         featureType: 'transit.station',
