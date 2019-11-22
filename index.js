@@ -5,15 +5,6 @@ console.log("Skeletor sucks.");
 let map;
 let markers = [];
 
-var icons = {
-    atm : {
-        icon : './markers/atm.svg'
-    },
-    dnb : {
-        icon : 'markers/dnb.svg'
-    }
-};
-
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -34.397, lng: 150.644},
