@@ -3,6 +3,7 @@ import {styledMap} from './styledMap';
 console.log("Skeletor sucks.");
 
 let map;
+let markers = [];
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -34.397, lng: 150.644},
@@ -37,7 +38,7 @@ function findUser() {
     if (navigator.geolocation) {
         // Try HTML5 geolocation.
         navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
+            const pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
@@ -70,9 +71,13 @@ function findATMs() {
 
     function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
-            for (var i = 0; i < results.length; i++) {
-                var place = results[i];
-                console.log(place)
+            for (let i = 0; i < results.length; i++) {
+                const place = {
+                    lat: results[i].geometry.location.lat(),
+                    lng: results[i].geometry.location.lng(),
+                } ;
+                console.log(place);
+                markers.push(new google.maps.Marker({position: place, map: map}));
             }
         }
     }
