@@ -4,7 +4,6 @@ console.log("Skeletor sucks.");
 
 let map;
 function initMap() {
-    const userPosition = findUser();
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -34.397, lng: 150.644},
         zoom: 8,
@@ -35,8 +34,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 function findUser() {
     let infoWindow = new google.maps.InfoWindow;
-    try {
-    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        // Try HTML5 geolocation.
         navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
                 lat: position.coords.latitude,
@@ -51,10 +50,32 @@ function findUser() {
         }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
         });
-    } catch (error) {
-            handleLocationError(false, infoWindow, map.getCenter());
+    } else {
+        handleLocationError(false, infoWindow, map.getCenter());
     }
+}
 
+function findATMs() {
+    const lat = map.getBounds().getNorthEast().lat();
+    const lng = map.getBounds().getSouthWest().lng();
+    const position = new google.maps.LatLng(lat,lng);
+    const request = {
+        location: position,
+        radius: '2000',
+        type: ['atm']
+    };
+    let service;
+    service = new google.maps.places.PlacesService(map);
+    service.nearbySearch(request, callback);
+
+    function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+                var place = results[i];
+                console.log(place)
+            }
+        }
+    }
 }
 
 function setup() {
@@ -62,7 +83,12 @@ function setup() {
      * Buttons
      */
     document.getElementById('btn-location').addEventListener('click', () => {
-        console.log('whoami')
+        console.log('whoami');
         findUser();
-    })
+    });
+
+    document.getElementById('btn-atms').addEventListener('click', () => {
+        console.log('nearby atms');
+        findATMs();
+    });
 }
