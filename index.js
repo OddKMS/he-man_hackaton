@@ -12,15 +12,6 @@ function initMap() {
         styles: styledMap
     });
 
-    var icons = {
-        atm : {
-            icon : 'markers/atm.svg'
-        },
-        dnb : {
-            icon : 'markers/dnb.svg'
-        }
-    };
-
     console.log("Set up map: ", map);
     setup();
 }
@@ -95,8 +86,8 @@ function findATMs() {
 }
 
 function findBankBranches() {
-    const lat = map.getBounds().getNorthEast().lat();
-    const lng = map.getBounds().getSouthWest().lng();
+    const lat = map.getBounds().getCenter().lat();
+    const lng = map.getBounds().getCenter().lng();
     const position = new google.maps.LatLng(lat,lng);
     const request = {
         location: position,
