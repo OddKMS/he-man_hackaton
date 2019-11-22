@@ -14,6 +14,8 @@ function initMap() {
 
     console.log("Set up map: ", map);
     setup();
+
+    findUser();
 }
 window.onload = initMap();
 
