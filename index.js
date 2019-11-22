@@ -14,6 +14,8 @@ function initMap() {
 
     console.log("Set up map: ", map);
     setup();
+
+    findUser();
 }
 window.onload = initMap();
 
@@ -63,12 +65,17 @@ function findATMs() {
 
     function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
+
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+
             for (let i = 0; i < results.length; i++) {
                 const place = {
                     lat: results[i].geometry.location.lat(),
                     lng: results[i].geometry.location.lng(),
                 };
-                console.log(results[i])
+                console.log(results[i]);
                 markers.push(new google.maps.Marker({
                     position: place,
                     map: map,
@@ -100,6 +107,11 @@ function findBankBranches() {
 
     function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
+
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+
             for (let i = 0; i < results.length; i++) {
                 const place = {
                     lat: results[i].geometry.location.lat(),
